@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if name %}
+<h1>User Added!</h1>
+{% else %}
+<div class="container">
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <form class="row g-3" method="POST">
+            {{ form.hidden_tag() }}
+            <div class="col-md-6 position-relative">
+                {{ form.name.label(class="form-label") }}
+                {{ form.name(class="form-control") }}
+            </div>
+
+            <div class="col-md-6 position-relative">
+                {{ form.username.label(class="form-label") }}
+                {{ form.username(class="form-control") }}
+            </div>
+
+            <div class="col-md-6 position-relative">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control") }}
+            </div>
+
+            <div class="col-md-6 position-relative">
+                {{ form.favorite_color.label(class="form-label") }}
+                {{ form.favorite_color(class="form-control") }}
+            </div>
+
+            <div class="col-md-6 position-relative">
+                {{ form.password_hash.label(class="form-label") }}
+                {{ form.password_hash(class="form-control") }}
+            </div>
+
+            <div class="col-md-6 position-relative">
+                {{ form.password_hash2.label(class="form-label") }}
+                {{ form.password_hash2(class="form-control") }}
+            </div>
+
+            <div class="col-12">
+                {{ form.submit(class="btn btn-secondary") }}
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,69 @@
+<!-- templates/songs.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div>
+        <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('main.add_songs')}}" role="button">Add New Song</a>
+    </div>
+    <br>
+    <table class="table table-striped table-hover">
+        <thead class="table-group-divider">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Artist</th>
+                <th scope="col">Album</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Release Date</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for song in songs %}
+            <tr>
+                <td>{{ song.title }}</td>
+                <td>{{ song.artist }}</td>
+                <td>{{ song.album }}</td>
+                <td>{{ song.genre }}</td>
+                <td>{{ song.release_date }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Action
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item btn-sm update-song-btn" href="{{ url_for('main.update_song', song_id=song.id) }}">Update</a></li>
+                            <li><a class="dropdown-item delete-song-btn" href="#" data-bs-toggle="modal" data-bs-target="#deleteSongModal{{ song.id }}">Delete</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for Delete Confirmation -->
+{% for song in songs %}
+<div class="modal fade" id="deleteSongModal{{ song.id }}" tabindex="-1" aria-labelledby="deleteSongModalLabel{{ song.id }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteSongModalLabel{{ song.id }}">Delete Song</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete '{{ song.title }}'?</p>
+        <!-- Form for submitting song ID -->
+        <form action="{{ url_for('main.delete_song', song_id=song.id | string) }}" method="post">
+            <input type="hidden" name="song_id" value="{{ song.id }}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

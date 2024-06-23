@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <form class="row g-3 needs-validation" method="post" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="col-md-6 position-relative">
+            {{ form.title.label(class="form-label") }}
+            {{ form.title(class="form-control") }}
+        </div>
+
+        <div class="col-md-6 position-relative">
+            {{ form.artist.label(class="form-label") }}
+            {{ form.artist(class="form-control") }}
+        </div>
+
+        <div class="col-md-6 position-relative">
+            {{ form.album.label(class="form-label") }}
+            {{ form.album(class="form-control") }}
+        </div>
+
+        <div class="col-md-6 position-relative">
+            {{ form.genre.label(class="form-label") }}
+            {{ form.genre(class="form-control") }}
+        </div>
+
+        <div class="col-md-6 position-relative">
+            {{ form.release_date.label(class="form-label") }}
+            {{ form.release_date(class="form-control") }}
+        </div>
+
+        <div class="col-md-6 position-relative">
+            {{ form.song_profile.label(class="form-label") }}
+            {{ form.song_profile(class="form-control") }}
+        </div>
+
+        <div class="col-md-6 position-relative">
+            {{ form.song_file.label(class="form-label") }}
+            {{ form.song_file(class="form-control") }}
+        </div>
+
+        <div class="col-12">
+            {{ form.submit(class="btn btn-secondary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

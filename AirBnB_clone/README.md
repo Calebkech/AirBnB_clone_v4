@@ -251,9 +251,7 @@ e952b772-80a5-41e9-b728-6bc4dc5c21b4
 
 > *Updates an instance based on the class name, id, and kwargs passed.*
 > *Update the file.json*
-
 ```
-
 ## Authors
 <details>
     <summary>Godswill Kalu</summary>
@@ -266,3 +264,15 @@ e952b772-80a5-41e9-b728-6bc4dc5c21b4
     </ul>
 </details>
 
+## How to add Author file
+`Bash script for generating the list of authors in git repo`
+```
+
+#!/bin/sh
+
+git shortlog -se \
+  | perl -spe 's/^\s+\d+\s+//' \
+  | sed -e '/^CommitSyncScript.*$/d' \
+  > AUTHORS
+  
+  ```

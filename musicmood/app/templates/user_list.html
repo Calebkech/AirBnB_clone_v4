@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div>
+        <a class="btn btn-outline-secondary btn-sm" href="/user/add" role="button">Add New User</a>
+    </div>
+    <br>
+    <table class="table table-hover table-bordered table-striped">
+        <thead class="table-group-divider">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Username</th>
+                <th scope="col">Favorite Color</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.favorite_color }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton{{ user.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                            Action
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ user.id }}">
+                            <li><a class="dropdown-item btn-sm update-user-btn" href="{{ url_for('main.update_user', user_id=user.id) }}">Update</a></li>
+                            <li><a class="dropdown-item delete-user-btn" href="#" data-bs-toggle="modal" data-bs-target="#deleteUserModal{{ user.id }}">Delete</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Modal for Delete User Confirmation -->
+    {% for user in users %}
+    <div class="modal fade" id="deleteUserModal{{ user.id }}" tabindex="-1" aria-labelledby="deleteUserModalLabel{{ user.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="deleteUserModalLabel{{ user.id }}">Delete User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete '{{ user.name }}'?</p>
+            <!-- Form for submitting user ID -->
+            <form action="{{ url_for('main.delete_user', user_id=user.id) }}" method="post">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <form class="row g-3" id="update-song-form" action="{{ url_for('main.update_song', song_id=song.id) }}" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <input type="hidden" id="update-song-id" name="update-song-id" value="{{ song.id }}">
+        
+        <div class="col-md-6 position-relative">
+            <label for="update-title" class="form-label">Title</label>
+            {{ form.title(class="form-control", id="update-title") }}
+            {% if form.title.errors %}
+                <div class="invalid-feedback">
+                    {{ form.title.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-6 position-relative">
+            <label for="update-artist" class="form-label">Artist</label>
+            {{ form.artist(class="form-control", id="update-artist") }}
+            {% if form.artist.errors %}
+                <div class="invalid-feedback">
+                    {{ form.artist.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-6 position-relative">
+            <label for="update-album" class="form-label">Album</label>
+            {{ form.album(class="form-control", id="update-album") }}
+            {% if form.album.errors %}
+                <div class="invalid-feedback">
+                    {{ form.album.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-6 position-relative">
+            <label for="update-genre" class="form-label">Genre</label>
+            {{ form.genre(class="form-control", id="update-genre") }}
+            {% if form.genre.errors %}
+                <div class="invalid-feedback">
+                    {{ form.genre.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-6 position-relative">
+            <label for="update-release_date" class="form-label">Release Date</label>
+            {{ form.release_date(class="form-control", id="update-release_date") }}
+            {% if form.release_date.errors %}
+                <div class="invalid-feedback">
+                    {{ form.release_date.errors[0] }}
+                </div>
+            {% endif %}
+        </div>
+                
+        <div class="col-12">
+            <button type="submit" class="btn btn-outline-secondary">Update</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

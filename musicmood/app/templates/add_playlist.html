@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Create a New Playlist</h2>
+    <form class="row g-3 needs-validation" action="/add_playlist" method="post" enctype="multipart/form-data" novalidate>
+        <div class="col-md-6 position-relative">
+            <label class="form-label">Playlist Name</label>
+            <input type="text" class="form-control" name="name" required>
+            <div class="invalid-feedback">
+                Please provide a playlist name.
+            </div>
+        </div>
+        <div class="col-md-6 position-relative">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" name="description" required>
+            <div class="invalid-feedback">
+                Please provide a description.
+            </div>
+        </div>
+        <div class="col-md-6 position-relative">
+            <label class="form-label">Cover Image</label>
+            <input type="file" class="form-control" name="cover_image" accept="image/*">
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
