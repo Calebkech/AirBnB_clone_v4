@@ -32,4 +32,11 @@ class PlaylistForm(FlaskForm):
 	name = StringField("Name", validators=[DataRequired()])
 	description = StringField("Description", validators=[DataRequired()])
 	playlist_profile = FileField("Image")
+	submit = SubmitField("Submit")
+
+#LoginForm
+class LoginForm(FlaskForm):
+	username = StringField("Username", validators=[DataRequired()])
+	password = PasswordField("Password", validators=[DataRequired()])
+	submit = SubmitField("Login")
 	

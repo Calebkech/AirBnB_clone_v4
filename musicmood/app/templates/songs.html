@@ -7,20 +7,17 @@
         <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('main.add_songs')}}" role="button">Add New Song</a>
     </div>
     <br>
-    <table class="table table-striped table-hover">
-        <thead class="table-group-divider">
-            <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Artist</th>
-                <th scope="col">Album</th>
-                <th scope="col">Genre</th>
-                <th scope="col">Release Date</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
+    <table class="table table-sm table-striped table-hover">
         <tbody>
             {% for song in songs %}
-            <tr>
+            <tr class="shadow p-3 mb-5 bg-body rounded">
+                <td>
+                    {% if song.song_profile %}
+                        <img src="{{ url_for('static', filename=song.song_profile) }}" style="width: 50px; height: 50px;">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='song_image/default_song_image.png') }}" style="width: 50px; height: 50px;">
+                    {% endif %}
+                </td>
                 <td>{{ song.title }}</td>
                 <td>{{ song.artist }}</td>
                 <td>{{ song.album }}</td>

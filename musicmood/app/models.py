@@ -1,6 +1,7 @@
 import uuid
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
 db = SQLAlchemy()
 
@@ -20,7 +21,7 @@ class Song(db.Model):
         return f"<Song {self.title}>"
 
 # User table
-class Users(db.Model):
+class Users(db.Model, UserMixin):
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     username = db.Column(db.String(20), nullable=False, unique=True)
     name = db.Column(db.String(200), nullable=False)
@@ -40,10 +41,9 @@ class Users(db.Model):
 
 # Playlist table
 class Playlist(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     name = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=True)
-    image = db.Column(db.Text, nullable=False)
     playlist_profile = db.Column(db.String(255), nullable=True)
     songs = db.relationship('Song', secondary='playlist_song', backref='playlists')
     user_id = db.Column(db.String(36), db.ForeignKey('users.id', ondelete="CASCADE"))
